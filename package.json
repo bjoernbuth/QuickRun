@@ -1,0 +1,82 @@
+{
+  "name": "quickrun",
+  "displayName": "QuickRun",
+  "description": "",
+  "version": "0.1.1",
+  "publisher": "bj",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quickrun.quickRunCommand",
+        "title": "Quick Run Command"
+      },
+      {
+        "command": "quickrun.help",
+        "title": "Quickrun Help"
+      }
+    ],
+    "configuration": {
+      "title": "Quickrun",
+      "properties": {
+        "quickrun.commands": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "shortcut": {
+                "type": "string"
+              },
+              "cmd": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "shortcut",
+              "cmd",
+              "description"
+            ]
+          },
+          "description": "List of commands for Quickrun."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.82.0",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bjoernbuth/QuickRun"
+  },
+  "icon": "./images/RunCommand.png",
+  "license": "GPLv3"
+}
