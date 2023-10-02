@@ -42,7 +42,8 @@ export function activate(context: vscode.ExtensionContext) {
     let helpDisposable = vscode.commands.registerCommand('quickrun.help', () => {
         // Create and show a new webview
 
-        saveWebviewContentToFile();
+        // this will save the content of the help to a file
+        // saveWebviewContentToFile();
 
         const panel = vscode.window.createWebviewPanel(
             'quickrunHelp',
