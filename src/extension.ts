@@ -43,6 +43,8 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 
+
+
 function getWebviewContent() {
     const groups: { [key: string]: Array<{ shortcut: string, cmd: string, description?: string }> } = {};
 
@@ -57,7 +59,9 @@ function getWebviewContent() {
     // Generate the webview content based on groups
     let content = '<html><head></head><body>';
 
-    for (const groupName in groups) {
+    const sortedGroupNames = Object.keys(groups).sort();
+
+    for (const groupName of sortedGroupNames) {
         content += `<h2>${groupName}</h2><ul>`;
         for (const cmd of groups[groupName]) {
             content += `<li><strong>${cmd.shortcut}</strong>: ${cmd.description || ''}</li>`;
