@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 function quickRunCommand() {
@@ -40,6 +41,9 @@ export function activate(context: vscode.ExtensionContext) {
 
     let helpDisposable = vscode.commands.registerCommand('quickrun.help', () => {
         // Create and show a new webview
+
+        saveWebviewContentToFile();
+
         const panel = vscode.window.createWebviewPanel(
             'quickrunHelp',
             'Quickrun Commands',
@@ -86,29 +90,21 @@ function getWebviewContent() {
 }
 
 
-// function getWebviewContent() {
-//     let htmlContent = `
-//         <html>
-//         <head>
-//             <title>Quickrun Commands</title>
-//         </head>
-//         <body>
-//             <h1>Quickrun Commands</h1>
-//             <ul>
-//     `;
+function saveWebviewContentToFile() {
+    const content = getWebviewContent();
+    const pathToFile = vscode.workspace.workspaceFolders
+        ? vscode.workspace.workspaceFolders[0].uri.fsPath + '/quickrun_command_generated.html'
+        : 'quickrun_command_generated.html';
 
-//     for (const cmdInfo of customCommands) {
-//         htmlContent += `<li><strong>${cmdInfo.shortcut}</strong>: ${cmdInfo.description || ''} (Executes: ${cmdInfo.cmd})<br></br></li>`;
-//     }
+    fs.writeFile(pathToFile, content, err => {
+        if (err) {
+            vscode.window.showErrorMessage('Failed to save file! ' + err.message);
+        } else {
+            vscode.window.showInformationMessage(`File saved successfully to ${pathToFile}`);
+        }
+    });
+}
 
-//     htmlContent += `
-//             </ul>
-//         </body>
-//     </html>
-//     `;
-
-//     return htmlContent;
-// }
 
 
 export function deactivate() {}
