@@ -14,7 +14,7 @@ In settings.json we define:
       }
     ]
 
-Then running "Quick Run Command" opens a text box.
+Then running "Quick Run Command" o  pens a text box.
 Entering the shortname "br" will directly execute
 the given command (in this case editor.action.jumpToBracket)
 without having to press enter.
