@@ -2,7 +2,7 @@
   "name": "quickrun",
   "displayName": "QuickRun",
   "description": "",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "BjoernButh",
   "engines": {
     "vscode": "^1.82.0"

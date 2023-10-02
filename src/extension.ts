@@ -1,5 +1,19 @@
 import * as vscode from 'vscode';
-import { quickRunCommand } from './quickRunCommand';
+
+function quickRunCommand() {
+    const inputBox = vscode.window.createInputBox();
+    inputBox.prompt = 'Enter command code';
+
+    inputBox.onDidChangeValue((userInput) => {
+        if (COMMAND_MAP[userInput]) {
+            vscode.commands.executeCommand(COMMAND_MAP[userInput].cmd);
+            inputBox.hide();  // Close the input box once the command is executed
+        }
+    });
+
+    inputBox.show();
+}
+
 
 const customCommands: Array<{ shortcut: string, cmd: string, description: string, group?: string}> = vscode.workspace.getConfiguration().get('quickrun.commands') || [];
 
@@ -41,8 +55,6 @@ export function activate(context: vscode.ExtensionContext) {
         helpDisposable
     );
 }
-
-
 
 
 function getWebviewContent() {
